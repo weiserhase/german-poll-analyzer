@@ -38,28 +38,9 @@ pip install -e .
 
 ## Usage
 
-Once installed, you can use the CLI tool:
-
-- **Show recent data**:
-
-  ```bash
-  poll_analyzer show data
-  ```
-
-- **Plot a time series**:
-
-  ```bash
-  poll_analyzer show plot
-  ```
-
-- **Analyze minimal winning coalitions**:
-  ```bash
-  poll_analyzer coalition
-  ```
-
-The above commands will either print data to the terminal or open matplotlib windows for visualization.
-
----
+Once installed, you can use the CLI tool by using the built-in selection menu to select the display method and the data source.
+![Function Selection](./resources/function_selection.png)
+![Data Selection](./resources/institute_selction.png)
 
 ## Project Structure
 
@@ -68,12 +49,16 @@ Below is a simplified overview of the repository:
 ```bash
 poll_analyzer/
 ├── **init**.py
+├── utils
+│   ├── select_element.py
+│   ├── table_printer.py
 ├── cli.py
 ├── coalition_analysis.py
 ├── data_fetcher.py
 ├── data_parser.py
 ├── plotter.py
-├── utils.py
+├── config.py
+.gitignore
 pyproject.toml
 README.md
 LICENSE
@@ -84,7 +69,9 @@ LICENSE
 - **`data_parser.py`**: Parses the HTML table into a Pandas DataFrame.
 - **`coalition_analysis.py`**: Contains logic for identifying minimal winning coalitions.
 - **`plotter.py`**: Creates time series and coalition bar plots using matplotlib.
-- **`utils.py`**: Stores constants (like party colors) and common helpers.
+- **`config.py`**: Stores constants (like party colors) and common helpers.
+- **`utils/table_printer.py`**: Provides functions to print a table to the terminal.
+- **`utils/select_element.py`**: Provides functions to allow for interactive selections.
 - **`pyproject.toml`**: Defines package metadata and dependencies.
 - **`README.md`**: This file you are reading.
 - **`LICENSE`**: License for this project.
@@ -93,7 +80,7 @@ LICENSE
 
 ## Configuration
 
-You can edit `utils.py` to:
+You can edit `config.py` to:
 
 - Adjust **PARTY_COLORS** (change or add new party colors).
 - Update or add new URLs if you want to fetch data from other sources.
@@ -102,7 +89,7 @@ You can edit `utils.py` to:
 
 ## License
 
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the **GNU GENERAL PUBLIC LICENSE V3**. See the [LICENSE](LICENSE) file for details.
 
 ---
 

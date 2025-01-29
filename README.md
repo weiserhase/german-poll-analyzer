@@ -1,137 +1,111 @@
-# Sonntagsfrage Poll Analysis "german-poll-anlyzer"
+# poll_analyzer
 
-## Table of Contents
+**poll_analyzer** is a Python package that fetches, parses, and analyzes German polling data (Sonntagsfrage) from [wahlrecht.de](https://www.wahlrecht.de). It also includes tools to visualize time-series trends and compute minimal winning coalitions.
 
-- [Overview](#overview)
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Dependencies](#dependencies)
-- [Contributing](#contributing)
-- [License](#license)
-
-## Overview
-
-**Sonntagsfrage Poll Analysis** is a Python-based tool designed to scrape, analyze, and visualize polling data from [wahlrecht.de](https://www.wahlrecht.de/umfragen/insa.htm). It processes polling data for various political parties, generates insightful plots to track party performance over time, and computes minimal winning coalitions based on the latest poll results.
+---
 
 ## Features
 
-- **Data Scraping:** Automatically fetches and parses polling data from the specified website.
-- **Data Processing:** Cleans and structures the data for analysis using pandas.
-- **Visualization:** Generates time series plots for party polling trends and stacked bar charts for minimal winning coalitions.
-- **Coalition Analysis:** Identifies and displays minimal winning coalitions based on customizable thresholds.
-- **Customizable:** Easily adjust thresholds and excluded parties for coalition computations.
+- **Data Fetching**: Retrieve poll data directly from [wahlrecht.de](https://www.wahlrecht.de/umfragen/insa.htm).
+- **Parsing**: Converts HTML tables into a clean Pandas DataFrame.
+- **Visualization**: Plots party percentages over time, highlighting whether a party is below 5%.
+- **Coalition Analysis**: Calculates minimal winning coalitions based on a user-defined threshold.
+
+---
 
 ## Installation
 
-1. **Clone the Repository**
+You can install **poll_analyzer** locally in **editable mode** by using a `pyproject.toml` file. A sample `pyproject.toml` is provided in the repository.
 
-    ```bash
-    git clone https://github.com/yourusername/sonntagsfrage-poll-analysis.git
-    cd sonntagsfrage-poll-analysis
-    ```
+1. Clone this repo:
 
-2. **Create a Virtual Environment (Optional but Recommended)**
+'''bash
+git clone https://github.com/YourUsername/poll_analyzer.git
+'''
 
-    ```bash
-    python3 -m venv venv
-    source venv/bin/activate  # On Windows: venv\Scripts\activate
-    ```
+2. Move into the project folder and install:
 
-3. **Install Dependencies**
+'''bash
+cd poll_analyzer
+pip install -e .
+'''
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+3. After installation, you can run the `poll_analyzer` command from your terminal.
+
+---
 
 ## Usage
 
-Run the main script to scrape the latest polling data, generate visualizations, and compute minimal winning coalitions.
+Once installed, you can use the CLI tool:
 
-```bash
-python poll_analysis.py
-```
+- **Show recent data**:
+  '''bash
+  poll_analyzer show data
+  '''
 
-### Script Breakdown
+- **Plot a time series**:
+  '''bash
+  poll_analyzer show plot
+  '''
 
-- **Data Scraping and Processing**
+- **Analyze minimal winning coalitions**:
+  '''bash
+  poll_analyzer coalition
+  '''
 
-    ```python
-    import itertools
-    import ssl
-    from datetime import datetime
-    
-    import matplotlib.dates as mdates
-    import matplotlib.pyplot as plt
-    import pandas as pd
-    import requests
-    from bs4 import BeautifulSoup
-    from matplotlib.patches import Patch
-    
-    ssl._create_default_https_context = ssl._create_unverified_context
-    url = "https://www.wahlrecht.de/umfragen/insa.htm"
-    response = requests.get(url)
-    html_content = response.text
-    soup = BeautifulSoup(html_content, "html.parser")
-    table = soup.find("table", class_="wilko")
-    # ... [rest of the data scraping and processing code]
-    ```
+The above commands will either print data to the terminal or open matplotlib windows for visualization.
 
-- **Visualization**
+---
 
-    ```python
-    plt.figure(figsize=(12, 6))
-    for party in parties_to_plot:
-        latest_value = df_plot[party].tail(1).values[0]
-        ls = "-" if latest_value > 5.0 else "--"
-        plt.plot(df_plot.index, df_plot[party], label=party, color=party_colors.get(party, "gray"), linestyle=ls)
-    # ... [rest of the plotting code]
-    plt.show()
-    ```
+## Project Structure
 
-- **Coalition Analysis**
+Below is a simplified overview of the repository:
 
-    ```python
-    def minimal_winning_coalitions_for_row(row, threshold=45.0, exclude_parties=None, minimal_threshold=50.0):
-        # ... [function implementation]
-    
-    winning_coalitions = minimal_winning_coalitions_for_row(
-        df.iloc[-1], 
-        threshold=45.0, 
-        exclude_parties=parties_excluded_from_coalition
-    )
-    # ... [rest of the coalition analysis code]
-    ```
+'''bash
+poll_analyzer/
+├── **init**.py
+├── cli.py
+├── coalition_analysis.py
+├── data_fetcher.py
+├── data_parser.py
+├── plotter.py
+├── utils.py
+pyproject.toml
+README.md
+LICENSE
+'''
 
-## Dependencies
+- **`cli.py`**: Provides the command-line interface (CLI) entry point.
+- **`data_fetcher.py`**: Fetches raw HTML data from wahlrecht.de.
+- **`data_parser.py`**: Parses the HTML table into a Pandas DataFrame.
+- **`coalition_analysis.py`**: Contains logic for identifying minimal winning coalitions.
+- **`plotter.py`**: Creates time series and coalition bar plots using matplotlib.
+- **`utils.py`**: Stores constants (like party colors) and common helpers.
+- **`pyproject.toml`**: Defines package metadata and dependencies.
+- **`README.md`**: This file you are reading.
+- **`LICENSE`**: License for this project.
 
-The project relies on the following Python libraries:
+---
 
-- `itertools`
-- `ssl`
-- `datetime`
-- `matplotlib`
-- `pandas`
-- `requests`
-- `beautifulsoup4`
+## Configuration
 
-You can install all dependencies using:
+You can edit `utils.py` to:
 
-```bash
-pip install -r requirements.txt
-```
+- Adjust **PARTY_COLORS** (change or add new party colors).
+- Update or add new URLs if you want to fetch data from other sources.
 
-## Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/YourFeature`)
-3. Commit your changes (`git commit -m 'Add some feature'`)
-4. Push to the branch (`git push origin feature/YourFeature`)
-5. Open a pull request
+---
 
 ## License
 
-This project is licensed under the [GNU V3](LICENSE).
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
 
+---
+
+## Contributing
+
+Feel free to open issues and submit pull requests. Contributions, suggestions, and bug reports are welcome!
+
+---
+
+**Happy Analyzing!**

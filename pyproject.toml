@@ -1,0 +1,23 @@
+
+# Example pyproject.toml snippet
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "poll_analyzer"
+version = "0.1.0"
+description = "A package for analyzing German polls"
+requires-python = ">=3.12"
+authors = [
+    {name = "Jan Keller", email = "j.keller.wol@gmail.com"},
+]
+dependencies = [
+  "requests",
+  "beautifulsoup4",
+  "pandas",
+  "matplotlib",
+]
+[tool.setuptools]
+packages = {find = {where = ["src"]}}
+package-dir = {"" = "src"}

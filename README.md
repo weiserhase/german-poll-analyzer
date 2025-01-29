@@ -22,7 +22,7 @@ You can install **poll_analyzer** locally in **editable mode** by using a `pypro
 1. Clone this repo:
 
 ```bash
-git clone https://github.com/YourUsername/poll_analyzer.git
+git clone https://github.com/weiserhase/german-poll-analyzer.git
 ```
 
 2. Move into the project folder and install:

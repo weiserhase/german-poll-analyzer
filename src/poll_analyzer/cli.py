@@ -2,11 +2,11 @@
 import argparse
 
 from poll_analyzer.coalition_analysis import minimal_winning_coalitions_for_row
+from poll_analyzer.config import PARTIES_TO_PLOT, PARTY_COLORS
 from poll_analyzer.data_fetcher import fetch_html
 from poll_analyzer.data_parser import parse_poll_data
 from poll_analyzer.plotter import (plot_minimal_winning_coalitions,
                                    plot_timeseries)
-from poll_analyzer.utils import PARTIES_TO_PLOT, PARTY_COLORS
 
 
 def main():
@@ -62,9 +62,9 @@ def analyze_coalitions():
     latest_poll = df.iloc[-1]
     coalitions = minimal_winning_coalitions_for_row(
         latest_poll,
-        threshold=45.0, # Display Threshold
+        threshold=47.5, # Display Threshold
         exclude_parties=["Sonstige"],  # Example: Exclude 'Sonstige'
-        minimal_threshold=50.0# Threshold for minimal coalitions
+        minimal_threshold=50.0 # Threshold for minimal coalitions
     )
     # Sort them descending by total
     coalitions_sorted = sorted(coalitions, key=lambda x: x[1], reverse=True)

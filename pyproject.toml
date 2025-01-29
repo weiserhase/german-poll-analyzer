@@ -1,7 +1,7 @@
 
 # Example pyproject.toml snippet
 [build-system]
-requires = ["setuptools", "wheel"]
+requires = ["setuptools", "wheel", "poetry-core>=1.0.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -21,3 +21,6 @@ dependencies = [
 [tool.setuptools]
 packages = {find = {where = ["src"]}}
 package-dir = {"" = "src"}
+
+[project.scripts]
+poll_analyzer = "poll_analyzer.cli:main"

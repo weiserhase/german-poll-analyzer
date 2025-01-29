@@ -1,7 +1,7 @@
 
 import requests
 
-from poll_analyzer.utils import WAHLRECHT_URL
+from poll_analyzer.config import WAHLRECHT_URL
 
 
 def fetch_html(url: str = WAHLRECHT_URL) -> str:

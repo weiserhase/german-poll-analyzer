@@ -9,7 +9,9 @@
 - **Data Fetching**: Retrieve poll data directly from [wahlrecht.de](https://www.wahlrecht.de/umfragen/insa.htm).
 - **Parsing**: Converts HTML tables into a clean Pandas DataFrame.
 - **Visualization**: Plots party percentages over time, highlighting whether a party is below 5%.
+  ![Plotted poll data](./resources/show_data.png)
 - **Coalition Analysis**: Calculates minimal winning coalitions based on a user-defined threshold.
+  ![Coalition Visualizer](./resources/coalition_0.png)
 
 ---
 
@@ -19,16 +21,16 @@ You can install **poll_analyzer** locally in **editable mode** by using a `pypro
 
 1. Clone this repo:
 
-'''bash
+```bash
 git clone https://github.com/YourUsername/poll_analyzer.git
-'''
+```
 
 2. Move into the project folder and install:
 
-'''bash
+```bash
 cd poll_analyzer
 pip install -e .
-'''
+```
 
 3. After installation, you can run the `poll_analyzer` command from your terminal.
 
@@ -39,19 +41,21 @@ pip install -e .
 Once installed, you can use the CLI tool:
 
 - **Show recent data**:
-  '''bash
+
+  ```bash
   poll_analyzer show data
-  '''
+  ```
 
 - **Plot a time series**:
-  '''bash
+
+  ```bash
   poll_analyzer show plot
-  '''
+  ```
 
 - **Analyze minimal winning coalitions**:
-  '''bash
+  ```bash
   poll_analyzer coalition
-  '''
+  ```
 
 The above commands will either print data to the terminal or open matplotlib windows for visualization.
 
@@ -61,7 +65,7 @@ The above commands will either print data to the terminal or open matplotlib win
 
 Below is a simplified overview of the repository:
 
-'''bash
+```bash
 poll_analyzer/
 ├── **init**.py
 ├── cli.py
@@ -73,7 +77,7 @@ poll_analyzer/
 pyproject.toml
 README.md
 LICENSE
-'''
+```
 
 - **`cli.py`**: Provides the command-line interface (CLI) entry point.
 - **`data_fetcher.py`**: Fetches raw HTML data from wahlrecht.de.

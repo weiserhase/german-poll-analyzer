@@ -29,7 +29,8 @@ git clone https://github.com/weiserhase/german-poll-analyzer.git
 
 ```bash
 cd poll_analyzer
-pip install -e .
+pipenv install 
+pipenv install -e .  
 ```
 
 3. After installation, you can run the `poll_analyzer` command from your terminal.

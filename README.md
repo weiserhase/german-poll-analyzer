@@ -32,6 +32,10 @@ cd poll_analyzer
 pipenv install 
 pipenv install -e .  
 ```
+The script can also be build as a windows executable using `pyinstaller`
+```bash 
+pyinstaller --onefile ./src/poll_analyzer/cli.py
+```
 
 3. After installation, you can run the `poll_analyzer` command from your terminal.
 
